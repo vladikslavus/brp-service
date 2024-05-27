@@ -19,9 +19,11 @@ window.addEventListener(
     if (currentScrollTop > lastScrollTop) {
       // console.log("Down");
       topbarTop.style.display = "none";
-      topbarBottom.style.top = "0";
-      nav.style.opacity = "0";
+      topbarBottom.style.top = "0";      
+      
       if (lgMediaQuery.matches === true) {
+        nav.style.opacity = "0";
+        
         setTimeout(() => {
           consult.style.opacity = "1";
           consult.style.zIndex = "1";
