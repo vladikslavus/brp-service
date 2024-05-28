@@ -3,6 +3,7 @@ const topbarTop = document.querySelector(".topbar__top");
 const topbarBottom = document.querySelector(".topbar__bottom");
 const nav = document.querySelector(".topbar__bottom-rights");
 const consult = document.querySelector(".topbar__bottom-consult");
+const overlay = document.querySelector(".page__overlay");
 const lgMediaQuery = window.matchMedia("(min-width: 992px)");
 
 const menuBtn = document.querySelector(".topbar__hamburger-wrapper");
@@ -13,42 +14,11 @@ let lastScrollTop = 0;
 window.addEventListener(
   "scroll",
   function () {
-    const currentScrollTop =
-      window.pageYOffset || document.documentElement.scrollTop;
+    const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-    if (currentScrollTop > lastScrollTop) {
-      // console.log("Down");
-      topbarTop.style.display = "none";
-      topbarBottom.style.top = "0";      
-      
-      if (lgMediaQuery.matches === true) {
-        nav.style.opacity = "0";
-        
-        setTimeout(() => {
-          consult.style.opacity = "1";
-          consult.style.zIndex = "1";
-        }, 150);
-      }
-    } else if (currentScrollTop < lastScrollTop) {
-      // console.log("Up");
-      topbarTop.style.display = "block";
-      if (currentScrollTop === 0) {
-        setTimeout(() => {
-          topbarBottom.style.top = `${topbarTop.offsetHeight}px`; // поднимаем на высоту верхнего блока
-        }, 150);
-        if (lgMediaQuery.matches === true) {
-          setTimeout(() => {
-            consult.style.opacity = "0";
-            consult.style.zIndex = "-1";
-
-            setTimeout(() => {
-              nav.style.opacity = "1";
-            }, 150);
-          }, 150);
-        }
-      }
+    if(lgMediaQuery.matches === true) {
+      document.body.classList.toggle('scrolled', currentScrollTop > 0);
     }
-    lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
   },
   false
 );
@@ -59,6 +29,7 @@ menuBtn.addEventListener("click", (e) => {
   menuBtn.classList.toggle("topbar__hamburger-wrapper--activate");
   menuHamburger.classList.toggle("animate");
   nav.classList.toggle("topbar__bottom-rights--active");
+  overlay.classList.toggle("page__overlay--active");
   // content.classList.toggle("content-active");
   document.body.classList.toggle("no-scroll");
   document.querySelector("html").classList.toggle("no-scroll");

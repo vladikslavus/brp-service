@@ -39,10 +39,12 @@ html {
 body {
   margin: 0;
   padding: 0;
+  // overflow-x: hidden;
 }
 
 .no-scroll {
   overflow: hidden;
+  height: 100%;
 }
 
 * {
@@ -63,7 +65,21 @@ body {
 
 .page {
   position: relative;
-  overflow-x: hidden;
+  height: 100%;
+
+  &__overlay {
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($color: #000000, $alpha: .4);
+
+    &--active {
+      display: block;
+    }
+  }
 }
 
 section {
